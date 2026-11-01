@@ -1,25 +1,208 @@
-import { ArrowUpRight, BookOpen, Languages, MessageCircle, Mic2, Sparkles, Volume2 } from 'lucide-react'
+import {
+  ArrowUpRight,
+  BookOpen,
+  Languages,
+  MessageCircle,
+  Mic2,
+  Sparkles,
+  Volume2,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
+
 const features = [
-  {to:'/translate',icon:Languages,title:'Translate naturally',desc:'Turn everyday English or Hindi into useful Kannada.',tag:'Everyday communication'},
-  {to:'/practice',icon:MessageCircle,title:'Practice conversations',desc:'Prepare for common situations with guided role-play.',tag:'Build confidence'},
-  {to:'/phrasebook',icon:BookOpen,title:'Keep useful phrases close',desc:'Explore practical expressions for daily life.',tag:'Quick reference'},
+  {
+    to: '/translate',
+    icon: Languages,
+    title: 'Translate naturally',
+    desc: 'Translate everyday English into useful Kannada.',
+    tag: 'Everyday communication',
+  },
+  {
+    to: '/practice',
+    icon: MessageCircle,
+    title: 'Practice conversations',
+    desc: 'Prepare for common situations with guided role-play.',
+    tag: 'Build confidence',
+  },
+  {
+    to: '/phrasebook',
+    icon: BookOpen,
+    title: 'Keep useful phrases close',
+    desc: 'Explore practical expressions for daily life.',
+    tag: 'Quick reference',
+  },
 ]
-const phrases=[['ನಮಸ್ಕಾರ','Namaskāra','Hello / Greetings'],['ಧನ್ಯವಾದಗಳು','Dhanyavādagaḷu','Thank you'],['ದಯವಿಟ್ಟು','Dayaviṭṭu','Please'],['ನನಗೆ ಅರ್ಥವಾಗಲಿಲ್ಲ','Nanage arthavāgalilla','I did not understand']]
-export default function Dashboard(){
- return <div>
-  <section className="relative overflow-hidden rounded-[28px] bg-[#174c3b] px-7 py-9 text-white md:px-11 md:py-12">
-   <div className="absolute -right-12 -top-24 h-72 w-72 rounded-full border-[38px] border-white/5"/><div className="absolute -bottom-32 right-40 h-72 w-72 rounded-full border-[1px] border-white/10"/>
-   <div className="relative max-w-2xl"><div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-[#e9d5a9]"><Sparkles size={14}/> Your everyday Kannada companion</div><h1 className="text-3xl font-bold leading-tight tracking-tight md:text-[42px]">Feel at home.<br/><span className="text-[#e9d5a9]">Speak Kannada.</span></h1><p className="mt-4 max-w-lg text-sm leading-6 text-white/75 md:text-base">Navigate daily conversations in Karnataka with practical language support that fits real-life situations.</p><Link to="/translate" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-[#f2dfb8] px-5 py-3 text-sm font-bold text-[#244735] transition hover:bg-white">Start translating <ArrowUpRight size={17}/></Link></div>
-   <div className="absolute bottom-8 right-10 hidden text-right lg:block"><div className="kannada text-5xl font-semibold text-white/90">ನಮಸ್ಕಾರ</div><div className="mt-2 text-xs tracking-widest text-white/50">NAMASKĀRA · HELLO</div></div>
-  </section>
-  <section className="mt-10"><div className="mb-5 flex items-end justify-between"><div><div className="text-[11px] font-bold uppercase tracking-[.18em] text-[#9a7841]">Explore tools</div><h2 className="mt-1 text-xl font-bold text-[#183b2e]">What would you like to do?</h2></div><span className="hidden text-xs text-[#9aa59b] sm:block">Choose a starting point</span></div>
-   <div className="grid gap-4 md:grid-cols-3">{features.map(({to,icon:Icon,title,desc,tag})=><Link key={to} to={to} className="group rounded-2xl border border-[#e7eade] bg-white p-5 transition hover:-translate-y-1 hover:border-[#b9cbb9] hover:shadow-lg hover:shadow-[#1c513b]/5"><div className="mb-5 flex items-center justify-between"><div className="grid h-11 w-11 place-items-center rounded-xl bg-[#edf3eb] text-[#174c3b]"><Icon size={21}/></div><ArrowUpRight size={18} className="text-[#aab5aa] transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#174c3b]"/></div><div className="text-[10px] font-bold uppercase tracking-wider text-[#a0804c]">{tag}</div><h3 className="mt-2 font-bold text-[#203d30]">{title}</h3><p className="mt-2 text-sm leading-6 text-[#7b8980]">{desc}</p></Link>)}</div>
-  </section>
-  <section className="mt-10 grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
-   <div className="rounded-2xl border border-[#e7eade] bg-white p-6"><div className="mb-5 flex items-center justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[.18em] text-[#9a7841]">Start with the basics</div><h2 className="mt-1 text-lg font-bold text-[#183b2e]">Useful phrases</h2></div><Link to="/phrasebook" className="text-xs font-bold text-[#236148]">View all →</Link></div><div className="grid gap-3 sm:grid-cols-2">{phrases.map(([kn,latin,en])=><div key={kn} className="rounded-xl bg-[#f7f8f4] p-4"><div className="kannada text-lg font-semibold text-[#1b503c]">{kn}</div><div className="mt-1 text-[11px] text-[#8c998f]">{latin}</div><div className="mt-2 text-sm font-medium text-[#47594e]">{en}</div></div>)}</div></div>
-   <div className="flex flex-col justify-between rounded-2xl bg-[#f0e8d8] p-6"><div><div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 text-[#8a6836]"><Mic2 size={20}/></div><h2 className="text-lg font-bold text-[#4c432f]">Speak, listen, learn.</h2><p className="mt-2 text-sm leading-6 text-[#80765f]">Voice tools are planned for a future stage. For now, explore the phrasebook and get familiar with everyday Kannada.</p></div><div className="mt-6 flex items-center gap-2 text-xs font-semibold text-[#80643a]"><Volume2 size={15}/> Voice features coming soon</div></div>
-  </section>
-  <p className="mt-8 text-center text-[11px] text-[#a1aaa0]">NammaSathi is an early-stage prototype. AI translation, speech and live conversation services are not connected yet.</p>
- </div>
+
+const phrases = [
+  ['ನಮಸ್ಕಾರ', 'Namaskāra', 'Hello / Greetings'],
+  ['ಧನ್ಯವಾದಗಳು', 'Dhanyavādagaḷu', 'Thank you'],
+  ['ದಯವಿಟ್ಟು', 'Dayaviṭṭu', 'Please'],
+  ['ನನಗೆ ಅರ್ಥವಾಗಲಿಲ್ಲ', 'Nanage arthavāgalilla', 'I did not understand'],
+]
+
+export default function Dashboard() {
+  return (
+    <div>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden rounded-[28px] bg-[#174c3b] px-7 py-9 text-white md:px-11 md:py-12">
+        <div className="absolute -right-12 -top-24 h-72 w-72 rounded-full border-[38px] border-white/5" />
+        <div className="absolute -bottom-32 right-40 h-72 w-72 rounded-full border border-white/10" />
+
+        <div className="relative max-w-2xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-[#e9d5a9]">
+            <Sparkles size={14} />
+            Your everyday Kannada companion
+          </div>
+
+          <h1 className="text-3xl font-bold leading-tight tracking-tight md:text-[42px]">
+            Feel at home.
+            <br />
+            <span className="text-[#e9d5a9]">Speak Kannada.</span>
+          </h1>
+
+          <p className="mt-4 max-w-lg text-sm leading-6 text-white/75 md:text-base">
+            Navigate daily conversations in Karnataka with practical language
+            support that fits real-life situations.
+          </p>
+
+          <Link
+            to="/translate"
+            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-[#f2dfb8] px-5 py-3 text-sm font-bold text-[#244735] transition hover:bg-white"
+          >
+            Start translating
+            <ArrowUpRight size={17} />
+          </Link>
+        </div>
+
+        <div className="absolute bottom-8 right-10 hidden text-right lg:block">
+          <div className="kannada text-5xl font-semibold text-white/90">
+            ನಮಸ್ಕಾರ
+          </div>
+          <div className="mt-2 text-xs tracking-widest text-white/50">
+            NAMASKĀRA · HELLO
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="mt-10">
+        <div className="mb-5 flex items-end justify-between">
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-[.18em] text-[#9a7841]">
+              Explore tools
+            </div>
+            <h2 className="mt-1 text-xl font-bold text-[#183b2e]">
+              What would you like to do?
+            </h2>
+          </div>
+
+          <span className="hidden text-xs text-[#9aa59b] sm:block">
+            Choose a starting point
+          </span>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {features.map(({ to, icon: Icon, title, desc, tag }) => (
+            <Link
+              key={to}
+              to={to}
+              className="group rounded-2xl border border-[#e7eade] bg-white p-5 transition hover:-translate-y-1 hover:border-[#b9cbb9] hover:shadow-lg hover:shadow-[#1c513b]/5"
+            >
+              <div className="mb-5 flex items-center justify-between">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#edf3eb] text-[#174c3b]">
+                  <Icon size={21} />
+                </div>
+
+                <ArrowUpRight
+                  size={18}
+                  className="text-[#aab5aa] transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#174c3b]"
+                />
+              </div>
+
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#a0804c]">
+                {tag}
+              </div>
+
+              <h3 className="mt-2 font-bold text-[#203d30]">{title}</h3>
+
+              <p className="mt-2 text-sm leading-6 text-[#7b8980]">
+                {desc}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Useful Phrases and Voice Features */}
+      <section className="mt-10 grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
+        <div className="rounded-2xl border border-[#e7eade] bg-white p-6">
+          <div className="mb-5 flex items-center justify-between">
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-[.18em] text-[#9a7841]">
+                Start with the basics
+              </div>
+
+              <h2 className="mt-1 text-lg font-bold text-[#183b2e]">
+                Useful phrases
+              </h2>
+            </div>
+
+            <Link
+              to="/phrasebook"
+              className="text-xs font-bold text-[#236148]"
+            >
+              View all →
+            </Link>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {phrases.map(([kn, latin, en]) => (
+              <div key={kn} className="rounded-xl bg-[#f7f8f4] p-4">
+                <div className="kannada text-lg font-semibold text-[#1b503c]">
+                  {kn}
+                </div>
+
+                <div className="mt-1 text-[11px] text-[#8c998f]">
+                  {latin}
+                </div>
+
+                <div className="mt-2 text-sm font-medium text-[#47594e]">
+                  {en}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-between rounded-2xl bg-[#f0e8d8] p-6">
+          <div>
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 text-[#8a6836]">
+              <Mic2 size={20} />
+            </div>
+
+            <h2 className="text-lg font-bold text-[#4c432f]">
+              Speak, listen, learn.
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-[#80765f]">
+              Voice tools are planned for a future stage. For now, explore
+              the phrasebook and get familiar with everyday Kannada.
+            </p>
+          </div>
+
+          <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-[#80643a]">
+            <Volume2 size={15} />
+            Voice features coming soon
+          </div>
+        </div>
+      </section>
+
+      {/* Project Disclaimer */}
+      <p className="mt-8 text-center text-[11px] leading-5 text-[#a1aaa0]">
+        NammaSathi provides AI-powered English–Kannada translation,
+        interactive Kannada practice, and a practical phrasebook.
+        Voice and live conversation features are planned for future development.
+      </p>
+    </div>
+  )
 }
