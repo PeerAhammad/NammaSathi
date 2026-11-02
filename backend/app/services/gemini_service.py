@@ -1,8 +1,18 @@
+import logging
+
 from google import genai
 
 from app.core.config import GEMINI_API_KEY, GEMINI_MODEL
 
+logger = logging.getLogger(__name__)
+
 client = genai.Client(api_key=GEMINI_API_KEY)
+
+FALLBACK_MODELS = [
+    GEMINI_MODEL,
+    "gemini-2.5-flash",
+    "gemini-2.0-flash",
+]
 
 
 def translate_text(
@@ -37,14 +47,34 @@ Instructions:
 Translation:
 """
 
-    response = client.models.generate_content(
-        model=GEMINI_MODEL,
-        contents=prompt,
+    attempted = set()
+    errors = []
+
+    for model in FALLBACK_MODELS:
+        if not model or model in attempted:
+            continue
+
+        attempted.add(model)
+
+        try:
+            logger.info("Attempting translation with model: %s", model)
+
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+            )
+
+            result = response.text
+
+            if result and result.strip():
+                return result.strip()
+
+            errors.append(f"{model}: empty response")
+
+        except Exception as exc:
+            logger.exception("Translation failed with model %s", model)
+            errors.append(f"{model}: {exc}")
+
+    raise RuntimeError(
+        "All Gemini translation models failed: " + " | ".join(errors)
     )
-
-    result = response.text
-
-    if not result or not result.strip():
-        raise ValueError("Gemini returned an empty translation.")
-
-    return result.strip()
