@@ -8,11 +8,13 @@ logger = logging.getLogger(__name__)
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-FALLBACK_MODELS = [
-    GEMINI_MODEL,
-    "gemini-2.5-flash",
-    "gemini-2.0-flash",
-]
+# Current supported Gemini models, in priority order.
+FALLBACK_MODELS = list(dict.fromkeys([
+    GEMINI_MODEL or "gemini-3.8-flash",
+    "gemini-3.8-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash-lite",
+]))
 
 
 def translate_text(
@@ -47,15 +49,9 @@ Instructions:
 Translation:
 """
 
-    attempted = set()
     errors = []
 
     for model in FALLBACK_MODELS:
-        if not model or model in attempted:
-            continue
-
-        attempted.add(model)
-
         try:
             logger.info("Attempting translation with model: %s", model)
 
@@ -67,9 +63,11 @@ Translation:
             result = response.text
 
             if result and result.strip():
+                logger.info("Translation successful with model: %s", model)
                 return result.strip()
 
             errors.append(f"{model}: empty response")
+            logger.warning("Model %s returned an empty response", model)
 
         except Exception as exc:
             logger.exception("Translation failed with model %s", model)
